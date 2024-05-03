@@ -1,0 +1,66 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  name     String
+  email    String @unique
+  role     Role   @default(USER)
+  password String
+
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @default(now())
+  Competitor Competitor[]
+  Vote       Vote[]
+
+  @@map("users")
+}
+
+model Vote {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  userId       String @db.ObjectId
+  competitorId String @db.ObjectId
+
+  user       User       @relation(fields: [userId], references: [id])
+  competitor Competitor @relation(fields: [competitorId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+
+  @@map("votes")
+}
+
+model Competitor {
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  userId String @db.ObjectId
+
+  name        String
+  email       String
+  phone       String?
+  photoUrl    String?
+  semister    String  @default("6")
+  description String?
+  isWinner    Boolean @default(false)
+  voteCount   Int     @default(0)
+
+  user User @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  Vote      Vote[]
+
+  @@map("competitors")
+}
+
+enum Role {
+  USER
+  ADMIN
+  COMPETITOR
+}
