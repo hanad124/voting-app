@@ -1,11 +1,11 @@
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
-import { UpdateUserDto } from 'src/auth/dto/auth.dto';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { Injectable, InternalServerErrorException } from "@nestjs/common";
+import { UpdateUserDto } from "src/auth/dto/auth.dto";
+import { PrismaService } from "src/prisma/prisma.service";
 import {
   excludeFields,
   excludeFieldsFromArr,
   hashPassword,
-} from 'src/utils/helpers';
+} from "src/utils/helpers";
 
 @Injectable()
 export class UsersService {
@@ -16,11 +16,11 @@ export class UsersService {
       const users = await this.prismaService.user.findMany({
         include: {
           Competitor: true,
-          Vote: true,
+          // Vote: true,
         },
       });
 
-      return excludeFieldsFromArr(users, ['password']);
+      return excludeFieldsFromArr(users, ["password"]);
     } catch (error) {
       const err = error as Error;
       throw new InternalServerErrorException(err.message);
@@ -35,11 +35,11 @@ export class UsersService {
         },
         include: {
           Competitor: true,
-          Vote: true,
+          // Vote: true,
         },
       });
 
-      return excludeFields(user, ['password']);
+      return excludeFields(user, ["password"]);
     } catch (error) {
       const err = error as Error;
       throw new InternalServerErrorException(err.message);

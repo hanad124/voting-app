@@ -17,6 +17,7 @@ const auth_guard_1 = require("./guards/auth.guard");
 const role_guard_1 = require("./guards/role.guard");
 const user_module_1 = require("./users/user.module");
 const competitor_module_1 = require("./competitor/competitor.module");
+const votes_module_1 = require("./votes/votes.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -30,6 +31,7 @@ exports.AppModule = AppModule = __decorate([
             prisma_module_1.PrimsaModule,
             auth_module_1.AuthModule,
             user_module_1.UsersModule,
+            votes_module_1.VotesModule,
             competitor_module_1.CompetitorModule,
         ],
         controllers: [],

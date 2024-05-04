@@ -25,6 +25,21 @@ let CompetitorController = class CompetitorController {
     async create(createCompetitorDto) {
         return this.competitorService.createCompetitor(createCompetitorDto);
     }
+    findAll() {
+        return this.competitorService.findAll();
+    }
+    findOne(id) {
+        return this.competitorService.findOne(id);
+    }
+    update(id, UpdateCompetitorDto) {
+        return this.competitorService.update(id, UpdateCompetitorDto);
+    }
+    delelete(id) {
+        return this.competitorService.deleteCompetitor(id);
+    }
+    async getWinner() {
+        return this.competitorService.getWinner();
+    }
 };
 exports.CompetitorController = CompetitorController;
 __decorate([
@@ -35,6 +50,43 @@ __decorate([
     __metadata("design:paramtypes", [create_competitorDto_1.CreateCompetitorDto]),
     __metadata("design:returntype", Promise)
 ], CompetitorController.prototype, "create", null);
+__decorate([
+    (0, common_1.Get)(),
+    (0, role_decorator_1.Roles)(client_1.Role.ADMIN),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], CompetitorController.prototype, "findAll", null);
+__decorate([
+    (0, common_1.Get)(":id"),
+    __param(0, (0, common_1.Param)("id")),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], CompetitorController.prototype, "findOne", null);
+__decorate([
+    (0, common_1.Patch)(":id"),
+    __param(0, (0, common_1.Param)("id")),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, create_competitorDto_1.UpdateCompetitorDto]),
+    __metadata("design:returntype", void 0)
+], CompetitorController.prototype, "update", null);
+__decorate([
+    (0, common_1.Delete)(":id"),
+    (0, role_decorator_1.Roles)(client_1.Role.ADMIN),
+    __param(0, (0, common_1.Param)("id")),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], CompetitorController.prototype, "delelete", null);
+__decorate([
+    (0, common_1.Get)("/winner"),
+    (0, role_decorator_1.Roles)(client_1.Role.ADMIN),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], CompetitorController.prototype, "getWinner", null);
 exports.CompetitorController = CompetitorController = __decorate([
     (0, common_1.Controller)("competitors"),
     __metadata("design:paramtypes", [competitor_service_1.CompetitorService])

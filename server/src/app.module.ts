@@ -8,6 +8,7 @@ import { JwtAuthGuard } from "./guards/auth.guard";
 import { RolesGuard } from "./guards/role.guard";
 import { UsersModule } from "./users/user.module";
 import { CompetitorModule } from "./competitor/competitor.module";
+import { VotesModule } from "./votes/votes.module";
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { CompetitorModule } from "./competitor/competitor.module";
     PrimsaModule,
     AuthModule,
     UsersModule,
+    VotesModule,
     CompetitorModule,
   ],
   controllers: [],

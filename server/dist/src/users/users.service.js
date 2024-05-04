@@ -22,10 +22,9 @@ let UsersService = class UsersService {
             const users = await this.prismaService.user.findMany({
                 include: {
                     Competitor: true,
-                    Vote: true,
                 },
             });
-            return (0, helpers_1.excludeFieldsFromArr)(users, ['password']);
+            return (0, helpers_1.excludeFieldsFromArr)(users, ["password"]);
         }
         catch (error) {
             const err = error;
@@ -40,10 +39,9 @@ let UsersService = class UsersService {
                 },
                 include: {
                     Competitor: true,
-                    Vote: true,
                 },
             });
-            return (0, helpers_1.excludeFields)(user, ['password']);
+            return (0, helpers_1.excludeFields)(user, ["password"]);
         }
         catch (error) {
             const err = error;

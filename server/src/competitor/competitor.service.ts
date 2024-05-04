@@ -28,7 +28,7 @@ export class CompetitorService {
 
       const competitor = await this.prismaService.competitor.create({
         data: competitorDto,
-        include: { Vote: true },
+        include: { Votes: true },
       });
 
       // Update user role to competitor
@@ -51,14 +51,14 @@ export class CompetitorService {
 
   findAll() {
     return this.prismaService.competitor.findMany({
-      include: { Vote: true, user: true },
+      include: { Votes: true, user: true },
     });
   }
 
   findOne(id: string) {
     return this.prismaService.competitor.findUnique({
       where: {
-        id,
+        id: id,
       },
     });
   }
@@ -70,7 +70,7 @@ export class CompetitorService {
           id,
         },
         data: updateCompetitorDto,
-        include: { Vote: true, user: true },
+        include: { Votes: true, user: true },
       });
     } catch (error) {
       throw new InternalServerErrorException(error);
@@ -92,11 +92,11 @@ export class CompetitorService {
   async getWinner() {
     try {
       const competitors = await this.prismaService.competitor.findMany({
-        include: { Vote: true, user: true },
+        include: { Votes: true, user: true },
       });
 
       const competitorsWithVotes = competitors.map((competitor) => {
-        const votes = competitor.Vote;
+        const votes = competitor.Votes;
         const voteCount = votes.length;
 
         return {
@@ -112,18 +112,18 @@ export class CompetitorService {
       const winner = sortedCompetitors[0];
 
       // other competitors will be set to false as they are not winners
-      const otherCompetitors = sortedCompetitors.slice[1];
+      // const otherCompetitors = sortedCompetitors.slice[1];
 
-      for (const competitor of otherCompetitors) {
-        await this.prismaService.competitor.update({
-          where: {
-            id: competitor.id,
-          },
-          data: {
-            isWinner: false,
-          },
-        });
-      }
+      // for (const competitor of otherCompetitors) {
+      //   await this.prismaService.competitor.update({
+      //     where: {
+      //       id: competitor.id,
+      //     },
+      //     data: {
+      //       isWinner: false,
+      //     },
+      //   });
+      // }
 
       const competitionWinner = await this.prismaService.competitor.update({
         where: {
@@ -133,6 +133,8 @@ export class CompetitorService {
           isWinner: true,
         },
       });
+
+      console.log(competitionWinner);
 
       return competitionWinner;
     } catch (error) {

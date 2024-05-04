@@ -7,3 +7,7 @@ export declare class CreateCompetitorDto {
     description: string;
     userId: string;
 }
+declare const UpdateCompetitorDto_base: import("@nestjs/common").Type<Partial<CreateCompetitorDto>>;
+export declare class UpdateCompetitorDto extends UpdateCompetitorDto_base {
+}
+export {};
