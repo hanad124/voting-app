@@ -47,6 +47,51 @@ let CompetitorService = class CompetitorService {
             throw new common_1.InternalServerErrorException(message);
         }
     }
+    findAll() {
+        return this.prismaService.competitor.findMany({
+            include: { Vote: true, user: true },
+        });
+    }
+    async getWinner() {
+        try {
+            const competitors = await this.prismaService.competitor.findMany({
+                include: { Vote: true, user: true },
+            });
+            const competitorsWithVotes = competitors.map((competitor) => {
+                const votes = competitor.Vote;
+                const voteCount = votes.length;
+                return {
+                    ...competitor,
+                    voteCount,
+                };
+            });
+            const sortedCompetitors = competitorsWithVotes.sort((a, b) => b.voteCount - a.voteCount);
+            const winner = sortedCompetitors[0];
+            const otherCompetitors = sortedCompetitors.slice[1];
+            for (const competitor of otherCompetitors) {
+                await this.prismaService.competitor.update({
+                    where: {
+                        id: competitor.id,
+                    },
+                    data: {
+                        isWinner: false,
+                    },
+                });
+            }
+            const competitionWinner = await this.prismaService.competitor.update({
+                where: {
+                    id: winner.id,
+                },
+                data: {
+                    isWinner: true,
+                },
+            });
+            return competitionWinner;
+        }
+        catch (error) {
+            throw new common_1.InternalServerErrorException(error);
+        }
+    }
 };
 exports.CompetitorService = CompetitorService;
 exports.CompetitorService = CompetitorService = __decorate([

@@ -1,3 +1,4 @@
+import { PartialType } from "@nestjs/swagger";
 import { IsEmail, IsNotEmpty, IsString } from "class-validator";
 
 export class CreateCompetitorDto {
@@ -29,3 +30,5 @@ export class CreateCompetitorDto {
   @IsNotEmpty()
   userId: string;
 }
+
+export class UpdateCompetitorDto extends PartialType(CreateCompetitorDto) {}

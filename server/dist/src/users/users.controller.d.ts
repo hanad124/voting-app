@@ -4,28 +4,6 @@ export declare class UsersController {
     private readonly usersService;
     constructor(usersService: UsersService);
     findAll(): Promise<Partial<{
-        Competitor: {
-            id: string;
-            userId: string;
-            name: string;
-            email: string;
-            phone: string;
-            photoUrl: string;
-            semister: string;
-            description: string;
-            isWinner: boolean;
-            voteCount: number;
-            createdAt: Date;
-            updatedAt: Date;
-        }[];
-        Vote: {
-            id: string;
-            userId: string;
-            competitorId: string;
-            createdAt: Date;
-            updatedAt: Date;
-        }[];
-    } & {
         id: string;
         name: string;
         email: string;
@@ -35,28 +13,6 @@ export declare class UsersController {
         updatedAt: Date;
     }>[]>;
     findOne(id: string): Promise<Partial<{
-        Competitor: {
-            id: string;
-            userId: string;
-            name: string;
-            email: string;
-            phone: string;
-            photoUrl: string;
-            semister: string;
-            description: string;
-            isWinner: boolean;
-            voteCount: number;
-            createdAt: Date;
-            updatedAt: Date;
-        }[];
-        Vote: {
-            id: string;
-            userId: string;
-            competitorId: string;
-            createdAt: Date;
-            updatedAt: Date;
-        }[];
-    } & {
         id: string;
         name: string;
         email: string;

@@ -6,7 +6,6 @@ export declare class CompetitorController {
     create(createCompetitorDto: CreateCompetitorDto): Promise<{
         Vote: {
             id: string;
-            userId: string;
             competitorId: string;
             createdAt: Date;
             updatedAt: Date;
