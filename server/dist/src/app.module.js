@@ -18,6 +18,8 @@ const role_guard_1 = require("./guards/role.guard");
 const user_module_1 = require("./users/user.module");
 const competitor_module_1 = require("./competitor/competitor.module");
 const votes_module_1 = require("./votes/votes.module");
+const upload_module_1 = require("./upload/upload.module");
+const cloudinary_module_1 = require("./cloudinary/cloudinary.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -33,6 +35,8 @@ exports.AppModule = AppModule = __decorate([
             user_module_1.UsersModule,
             votes_module_1.VotesModule,
             competitor_module_1.CompetitorModule,
+            upload_module_1.UploadModule,
+            cloudinary_module_1.CloudinaryModule
         ],
         controllers: [],
         providers: [

@@ -9,6 +9,8 @@ import { RolesGuard } from "./guards/role.guard";
 import { UsersModule } from "./users/user.module";
 import { CompetitorModule } from "./competitor/competitor.module";
 import { VotesModule } from "./votes/votes.module";
+import { UploadModule } from "./upload/upload.module";
+import { CloudinaryModule } from "./cloudinary/cloudinary.module";
 
 @Module({
   imports: [
@@ -21,6 +23,8 @@ import { VotesModule } from "./votes/votes.module";
     UsersModule,
     VotesModule,
     CompetitorModule,
+    UploadModule,
+    CloudinaryModule
   ],
   controllers: [],
   providers: [
