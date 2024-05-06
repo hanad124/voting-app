@@ -5,10 +5,10 @@ Its built using nestjs for backend and react for frontend & postgresql for datab
 
 ## features
 
-- User can register and login
-- candidate can upload their profile picture
-- User can vote for their favorite candidate
-- User can see the results of the voting
+- Users can register and login
+- candidates can upload their profile picture
+- Users can vote for their favorite candidate
+- Users can see the results of the voting
 - Admin can add, delete, update candidate
 - Admin can see the results of the voting
 
