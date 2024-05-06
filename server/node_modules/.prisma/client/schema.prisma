@@ -7,16 +7,13 @@ generator client {
 }
 
 datasource db {
-  provider = "mongodb"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
 model User {
-  id String @id @map("_id")
-
-  // id       String @id @default(auto()) @map("_id") @db.ObjectId
+  id       String @id @default(cuid())
   name     String
-  // email    String @unique
   role     Role   @default(USER)
   password String
 
@@ -27,10 +24,10 @@ model User {
 }
 
 model Vote {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
+  id String @id @default(cuid())
 
-  userId       String @db.ObjectId
-  competitorId String @db.ObjectId
+  userId       String @unique
+  competitorId String @unique
 
   user       User       @relation(fields: [userId], references: [id])
   competitor Competitor @relation(fields: [competitorId], references: [id])
@@ -42,8 +39,8 @@ model Vote {
 }
 
 model Competitor {
-  id     String @id @default(auto()) @map("_id") @db.ObjectId
-  userId String @db.ObjectId
+  id     String @id @default(cuid())
+  userId String @unique
 
   name        String
   email       String

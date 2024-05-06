@@ -13,8 +13,8 @@ Table users {
 
 Table votes {
   id String [pk]
-  userId String [not null]
-  competitorId String [not null]
+  userId String [unique, not null]
+  competitorId String [unique, not null]
   user users [not null]
   competitor competitors [not null]
   createdAt DateTime [default: `now()`, not null]
@@ -23,7 +23,7 @@ Table votes {
 
 Table competitors {
   id String [pk]
-  userId String [not null]
+  userId String [unique, not null]
   name String [not null]
   email String [not null]
   phone String
