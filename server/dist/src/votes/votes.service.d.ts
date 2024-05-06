@@ -11,11 +11,8 @@ export declare class VotesService {
         user: {
             id: string;
             name: string;
-            email: string;
             role: import(".prisma/client").$Enums.Role;
             password: string;
-            createdAt: Date;
-            updatedAt: Date;
         };
         competitor: {
             id: string;
@@ -42,11 +39,8 @@ export declare class VotesService {
         user: {
             id: string;
             name: string;
-            email: string;
             role: import(".prisma/client").$Enums.Role;
             password: string;
-            createdAt: Date;
-            updatedAt: Date;
         };
         competitor: {
             id: string;
@@ -73,11 +67,8 @@ export declare class VotesService {
         user: {
             id: string;
             name: string;
-            email: string;
             role: import(".prisma/client").$Enums.Role;
             password: string;
-            createdAt: Date;
-            updatedAt: Date;
         };
         competitor: {
             id: string;

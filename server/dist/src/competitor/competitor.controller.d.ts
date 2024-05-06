@@ -29,11 +29,8 @@ export declare class CompetitorController {
         user: {
             id: string;
             name: string;
-            email: string;
             role: import(".prisma/client").$Enums.Role;
             password: string;
-            createdAt: Date;
-            updatedAt: Date;
         };
         Votes: {
             id: string;
@@ -74,11 +71,8 @@ export declare class CompetitorController {
         user: {
             id: string;
             name: string;
-            email: string;
             role: import(".prisma/client").$Enums.Role;
             password: string;
-            createdAt: Date;
-            updatedAt: Date;
         };
         Votes: {
             id: string;

@@ -54,7 +54,7 @@ export class UsersService {
 
       data: {
         name: updateUserDto.name,
-        email: updateUserDto.email,
+        // email: updateUserDto.email,
         role: { set: updateUserDto.role },
         password: await hashPassword(updateUserDto.password),
       },

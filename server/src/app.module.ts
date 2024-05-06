@@ -11,6 +11,8 @@ import { CompetitorModule } from "./competitor/competitor.module";
 import { VotesModule } from "./votes/votes.module";
 import { UploadModule } from "./upload/upload.module";
 import { CloudinaryModule } from "./cloudinary/cloudinary.module";
+import { SeedService } from "prisma/seed/seed.service";
+import { SeedModule } from "prisma/seed/seed.module";
 
 @Module({
   imports: [
@@ -24,7 +26,7 @@ import { CloudinaryModule } from "./cloudinary/cloudinary.module";
     VotesModule,
     CompetitorModule,
     UploadModule,
-    CloudinaryModule
+    CloudinaryModule,
   ],
   controllers: [],
   providers: [

@@ -2,19 +2,19 @@ import {
   ForbiddenException,
   Injectable,
   NotFoundException,
-} from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
-import { PrismaService } from 'src/prisma/prisma.service';
-import { jwtPayload } from 'types/auth';
-import { LoginDto, RegistDto } from './dto/auth.dto';
-import { excludeFields, hashPassword, verifyPassword } from 'src/utils/helpers';
-import { Request } from 'express';
+} from "@nestjs/common";
+import { JwtService } from "@nestjs/jwt";
+import { PrismaService } from "src/prisma/prisma.service";
+import { jwtPayload } from "types/auth";
+import { LoginDto, RegistDto } from "./dto/auth.dto";
+import { excludeFields, hashPassword, verifyPassword } from "src/utils/helpers";
+import { Request } from "express";
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly prismaService: PrismaService,
-    private readonly jwtService: JwtService,
+    private readonly jwtService: JwtService
   ) {}
 
   async generateToken(payload: jwtPayload) {
@@ -24,23 +24,23 @@ export class AuthService {
   async login(loginDto: LoginDto) {
     const user = await this.prismaService.user.findUnique({
       where: {
-        email: loginDto.email,
+        id: loginDto.id,
       },
     });
 
     if (!user) {
-      throw new NotFoundException('user not found!');
+      throw new NotFoundException("user not found!");
     }
 
     const isPasswordvalid = verifyPassword(loginDto.password, user.password);
 
     if (!isPasswordvalid) {
-      throw new ForbiddenException('Invalid Credentials!');
+      throw new ForbiddenException("Invalid Credentials!");
     }
 
     const payload: jwtPayload = {
       id: user.id,
-      email: user.email,
+      // id: user.email,
       name: user.name,
       role: user.role,
     };
@@ -56,19 +56,19 @@ export class AuthService {
   async register(registerDto: RegistDto) {
     const existUser = await this.prismaService.user.findUnique({
       where: {
-        email: registerDto.email,
+        id: registerDto.id,
       },
     });
 
     if (existUser) {
-      throw new ForbiddenException('User already exists!');
+      throw new ForbiddenException("User already exists!");
     }
 
     const hashedPassword = await hashPassword(registerDto.password);
 
     const user = await this.prismaService.user.create({
       data: {
-        email: registerDto.email,
+        id: registerDto.id,
         name: registerDto.name,
         password: hashedPassword,
       },
@@ -76,7 +76,7 @@ export class AuthService {
 
     const payload: jwtPayload = {
       id: user.id,
-      email: user.email,
+      // email: user.email,
       name: user.name,
       role: user.role,
     };
@@ -99,9 +99,9 @@ export class AuthService {
     });
 
     if (!user) {
-      throw new NotFoundException('User not found');
+      throw new NotFoundException("User not found");
     }
 
-    return excludeFields(user, ['password']);
+    return excludeFields(user, ["password"]);
   }
 }

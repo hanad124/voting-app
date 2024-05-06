@@ -6,7 +6,6 @@ export declare class JwtStrategy extends JwtStrategy_base {
     constructor(config: ConfigService);
     validate(payload: jwtPayload): Promise<{
         id: string;
-        email: string;
         name: string;
         role: string;
     }>;

@@ -55,7 +55,6 @@ let UsersService = class UsersService {
             },
             data: {
                 name: updateUserDto.name,
-                email: updateUserDto.email,
                 role: { set: updateUserDto.role },
                 password: await (0, helpers_1.hashPassword)(updateUserDto.password),
             },

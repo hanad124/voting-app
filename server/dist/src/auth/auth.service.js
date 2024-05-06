@@ -25,19 +25,18 @@ let AuthService = class AuthService {
     async login(loginDto) {
         const user = await this.prismaService.user.findUnique({
             where: {
-                email: loginDto.email,
+                id: loginDto.id,
             },
         });
         if (!user) {
-            throw new common_1.NotFoundException('user not found!');
+            throw new common_1.NotFoundException("user not found!");
         }
         const isPasswordvalid = (0, helpers_1.verifyPassword)(loginDto.password, user.password);
         if (!isPasswordvalid) {
-            throw new common_1.ForbiddenException('Invalid Credentials!');
+            throw new common_1.ForbiddenException("Invalid Credentials!");
         }
         const payload = {
             id: user.id,
-            email: user.email,
             name: user.name,
             role: user.role,
         };
@@ -50,23 +49,22 @@ let AuthService = class AuthService {
     async register(registerDto) {
         const existUser = await this.prismaService.user.findUnique({
             where: {
-                email: registerDto.email,
+                id: registerDto.id,
             },
         });
         if (existUser) {
-            throw new common_1.ForbiddenException('User already exists!');
+            throw new common_1.ForbiddenException("User already exists!");
         }
         const hashedPassword = await (0, helpers_1.hashPassword)(registerDto.password);
         const user = await this.prismaService.user.create({
             data: {
-                email: registerDto.email,
+                id: registerDto.id,
                 name: registerDto.name,
                 password: hashedPassword,
             },
         });
         const payload = {
             id: user.id,
-            email: user.email,
             name: user.name,
             role: user.role,
         };
@@ -84,9 +82,9 @@ let AuthService = class AuthService {
             },
         });
         if (!user) {
-            throw new common_1.NotFoundException('User not found');
+            throw new common_1.NotFoundException("User not found");
         }
-        return (0, helpers_1.excludeFields)(user, ['password']);
+        return (0, helpers_1.excludeFields)(user, ["password"]);
     }
 };
 exports.AuthService = AuthService;

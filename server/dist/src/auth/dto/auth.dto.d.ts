@@ -1,16 +1,16 @@
-import { Role } from '@prisma/client';
+import { Role } from "@prisma/client";
 export declare class LoginDto {
-    email: string;
+    id: string;
     password: string;
 }
 export declare class RegistDto {
     name: string;
-    email: string;
+    id: string;
     password: string;
 }
 export declare class UpdateUserDto {
     name: string;
-    email: string;
+    id: string;
     password: string;
     role: Role;
 }

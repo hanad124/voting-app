@@ -1,8 +1,8 @@
-import { JwtService } from '@nestjs/jwt';
-import { PrismaService } from 'src/prisma/prisma.service';
-import { jwtPayload } from 'types/auth';
-import { LoginDto, RegistDto } from './dto/auth.dto';
-import { Request } from 'express';
+import { JwtService } from "@nestjs/jwt";
+import { PrismaService } from "src/prisma/prisma.service";
+import { jwtPayload } from "types/auth";
+import { LoginDto, RegistDto } from "./dto/auth.dto";
+import { Request } from "express";
 export declare class AuthService {
     private readonly prismaService;
     private readonly jwtService;
@@ -19,10 +19,7 @@ export declare class AuthService {
     me(req: Request): Promise<Partial<{
         id: string;
         name: string;
-        email: string;
         role: import(".prisma/client").$Enums.Role;
         password: string;
-        createdAt: Date;
-        updatedAt: Date;
     }>>;
 }

@@ -18,7 +18,7 @@ export class CompetitorService {
     try {
       const user = await this.prismaService.user.findUnique({
         where: {
-          email: competitorDto.email,
+          id: competitorDto.userId,
         },
       });
 
@@ -34,7 +34,7 @@ export class CompetitorService {
       // Update user role to competitor
       await this.prismaService.user.update({
         where: {
-          email: user.email,
+          id: user.id,
         },
         data: {
           role: "COMPETITOR",
@@ -133,8 +133,6 @@ export class CompetitorService {
           isWinner: true,
         },
       });
-
-      console.log(competitionWinner);
 
       return competitionWinner;
     } catch (error) {

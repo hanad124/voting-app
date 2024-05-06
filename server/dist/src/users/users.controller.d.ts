@@ -21,11 +21,8 @@ export declare class UsersController {
     } & {
         id: string;
         name: string;
-        email: string;
         role: import(".prisma/client").$Enums.Role;
         password: string;
-        createdAt: Date;
-        updatedAt: Date;
     }>[]>;
     findOne(id: string): Promise<Partial<{
         Competitor: {
@@ -45,19 +42,13 @@ export declare class UsersController {
     } & {
         id: string;
         name: string;
-        email: string;
         role: import(".prisma/client").$Enums.Role;
         password: string;
-        createdAt: Date;
-        updatedAt: Date;
     }>>;
     update(id: string, updateUserDto: UpdateUserDto): Promise<{
         id: string;
         name: string;
-        email: string;
         role: import(".prisma/client").$Enums.Role;
         password: string;
-        createdAt: Date;
-        updatedAt: Date;
     }>;
 }

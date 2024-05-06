@@ -15,10 +15,7 @@ export declare class AuthController {
     me(req: Request): Promise<Partial<{
         id: string;
         name: string;
-        email: string;
         role: import(".prisma/client").$Enums.Role;
         password: string;
-        createdAt: Date;
-        updatedAt: Date;
     }>>;
 }

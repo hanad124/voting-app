@@ -36,7 +36,7 @@ exports.AppModule = AppModule = __decorate([
             votes_module_1.VotesModule,
             competitor_module_1.CompetitorModule,
             upload_module_1.UploadModule,
-            cloudinary_module_1.CloudinaryModule
+            cloudinary_module_1.CloudinaryModule,
         ],
         controllers: [],
         providers: [

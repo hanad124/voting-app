@@ -5,11 +5,8 @@
 Table users {
   id String [pk]
   name String [not null]
-  email String [unique, not null]
   role Role [not null, default: 'USER']
   password String [not null]
-  createdAt DateTime [default: `now()`, not null]
-  updatedAt DateTime [default: `now()`, not null]
   Competitor competitors [not null]
   Vote votes [not null]
 }

@@ -1,10 +1,10 @@
-import { Role } from '@prisma/client';
-import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
+import { Role } from "@prisma/client";
+import { IsEmail, IsNotEmpty, IsString } from "class-validator";
 
 export class LoginDto {
-  @IsEmail()
+  @IsString()
   @IsNotEmpty()
-  email: string;
+  id: string;
 
   @IsString()
   @IsNotEmpty()
@@ -16,9 +16,9 @@ export class RegistDto {
   @IsNotEmpty()
   name: string;
 
-  @IsEmail()
+  @IsString()
   @IsNotEmpty()
-  email: string;
+  id: string;
 
   @IsString()
   @IsNotEmpty()
@@ -30,9 +30,9 @@ export class UpdateUserDto {
   @IsNotEmpty()
   name: string;
 
-  @IsEmail()
+  @IsString()
   @IsNotEmpty()
-  email: string;
+  id: string;
 
   @IsString()
   @IsNotEmpty()
