@@ -7,13 +7,13 @@ function Login() {
   const validateMessages = {
     required: "${label} is required!",
     types: {
-      email: "Entered ${label} is not a valid email!",
+      string: "Entered ${label} is not a valid ID!",
     },
   };
 
   const onFinish = async (values: any) => {
     const userObj = {
-      email: values.email,
+      id: values.id,
       password: values.password,
     };
     try {
@@ -60,14 +60,14 @@ function Login() {
             validateMessages={validateMessages}
           >
             <Form.Item
-              label="Email"
-              name="email"
+              label="ID"
+              name="id"
               className="text-slate-600 font-light"
               data-aos="fade-up"
               rules={[
                 {
                   required: true,
-                  type: "email",
+                  type: "string",
                 },
               ]}
             >

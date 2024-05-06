@@ -1,5 +1,5 @@
 export type loginPayload = {
-  email: string;
+  id: string;
   password: string;
 };
 

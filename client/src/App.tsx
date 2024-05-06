@@ -5,6 +5,7 @@ import Dashboard from "./pages/dashboard";
 import PublicRoute from "./components/PublicRoute";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Register from "./pages/register";
+import Home from "./pages/Home";
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
             path="/"
             element={
               <PublicRoute>
-                <Login />
+                <Home />
               </PublicRoute>
             }
           />
