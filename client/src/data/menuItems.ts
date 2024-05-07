@@ -1,14 +1,14 @@
 export type TmenuItems = {
-  label: string;
-  path: string;
+  name: string;
+  href: string;
 };
 
 // Menu Items
 export const menuItems: TmenuItems[] = [
-  { label: "Home", path: "/" },
-  { label: "Votes", path: "/votes" },
-  { label: "Competitors", path: "/competitors" },
-  { label: "About", path: "/about" },
+  { name: "Home", href: "/" },
+  { name: "Votes", href: "/votes" },
+  { name: "Competitors", href: "/competitors" },
+  { name: "About", href: "/about" },
   //   { label: "Blog", path: "/blog" },
   //   { label: "Careers", path: "/careers" },
 ];

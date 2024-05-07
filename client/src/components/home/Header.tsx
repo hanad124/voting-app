@@ -1,166 +1,134 @@
-import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-
-import { LuLogIn } from "react-icons/lu";
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
-import { Button } from "@/components/ui/button";
-import logo from "../../../public/assets/logo.svg";
-
+import { useState } from "react";
+import { Dialog } from "@headlessui/react";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { menuItems } from "@/data/menuItems";
+import logo from "../../../public/assets/logo.svg";
+import { Link } from "react-router-dom";
+import Hero from "./Hero";
 
-const Header = () => {
-  const pathname: string | any = useLocation();
+const navigation = [
+  { name: "Product", href: "#" },
+  { name: "Features", href: "#" },
+  { name: "Marketplace", href: "#" },
+  { name: "Company", href: "#" },
+];
 
-  const [isOpen, setIsOpen] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
-
-  function handleScroll() {
-    if (window.scrollY > 60) {
-      setIsVisible(true);
-    } else {
-      setIsVisible(false);
-    }
-  }
-
-  if (typeof window !== "undefined") {
-    window.addEventListener("scroll", handleScroll);
-  }
-
-  const handleSheetClose = () => {
-    setIsOpen(!isOpen);
-  };
+export default function Header() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <div>
-      <nav
-        className={`fixed top-0 left-0  z-20 py-2" w-full  border-b-[1px] border-custom_border  ${
-          isVisible ? "bg-background/80" : "bg-background"
-        } "
-    }`}
-        style={{
-          backdropFilter: "saturate(180%) blur(20px)",
-        }}
-      >
-        <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-7}`}>
-          <div className="flex items-center justify-between h-16">
-            <div className="flex-shrink-0">
-              <Link to={"/"}>
-                <div className="flex items-center gap-3">
-                  <img
-                    className="h-10 w-10"
-                    src={logo}
-                    alt="logo image"
-                    width={30}
-                    height={30}
-                  />
-                  <span className="text-2xl font-bold text-custom_secondary tracking-wide ">
-                    JUTSA
-                  </span>
-                </div>
-              </Link>
+    <div className="bg-white">
+      <header className="absolute inset-x-0 top-0 z-50">
+        <nav
+          className="flex items-center justify-between p-6 lg:px-8"
+          aria-label="Global"
+        >
+          <div className="flex lg:flex-1">
+            <Link to="/" className="-m-1.5 p-1.5">
+              <span className="sr-only">JUTSA</span>
+              <div className="flex items-center gap-2">
+                <img className="h-10 w-auto" src={logo} alt="" />
+                <span className="font-bold text-2xl tracking-wider">JUTSA</span>
+              </div>
+            </Link>
+          </div>
+          <div className="flex lg:hidden">
+            <button
+              type="button"
+              className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+              onClick={() => setMobileMenuOpen(true)}
+            >
+              <span className="sr-only">Open main menu</span>
+              <Bars3Icon className="h-6 w-6" aria-hidden="true" />
+            </button>
+          </div>
+          <div className="hidden lg:flex lg:gap-x-12">
+            {menuItems.map((item) => (
+              <a
+                key={item.name}
+                href={item.href}
+                className="text-sm font-semibold leading-6 text-gray-900"
+              >
+                {item.name}
+              </a>
+            ))}
+          </div>
+          <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+            <a
+              href="#"
+              className=" rounded-md bg-primary px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            >
+              Log in <span aria-hidden="true">&rarr;</span>
+            </a>
+          </div>
+        </nav>
+        <Dialog
+          className="lg:hidden"
+          open={mobileMenuOpen}
+          onClose={setMobileMenuOpen}
+        >
+          <div className="fixed inset-0 z-50" />
+          <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+            <div className="flex items-center justify-between">
+              <a href="#" className="-m-1.5 p-1.5">
+                <span className="sr-only">Your Company</span>
+                <img
+                  className="h-8 w-auto"
+                  src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+                  alt=""
+                />
+              </a>
+              <button
+                type="button"
+                className="-m-2.5 rounded-md p-2.5 text-gray-700"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <span className="sr-only">Close menu</span>
+                <XMarkIcon className="h-6 w-6" aria-hidden="true" />
+              </button>
             </div>
-            <div className="hidden md:block">
-              <div className="ml-10 flex items-baseline space-x-4">
-                {menuItems.map((item) => {
-                  return (
-                    <React.Fragment key={item.path}>
-                      <Link
-                        to={item.path}
-                        className={` px-3 py-2 text-md font-medium  ${
-                          pathname === item.path
-                            ? "text-custom_primary"
-                            : " text-custom_secondary hover:text-custom_primary"
-                        }`}
-                      >
-                        {item.label}
-                      </Link>
-                    </React.Fragment>
-                  );
-                })}
+            <div className="mt-6 flow-root">
+              <div className="-my-6 divide-y divide-gray-500/10">
+                <div className="space-y-2 py-6">
+                  {navigation.map((item) => (
+                    <a
+                      key={item.name}
+                      href={item.href}
+                      className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                    >
+                      {item.name}
+                    </a>
+                  ))}
+                </div>
+                <div className="py-6 w-full relative">
+                  <a
+                    href="#"
+                    className="w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  >
+                    Log in
+                  </a>
+                </div>
               </div>
             </div>
+          </Dialog.Panel>
+        </Dialog>
+      </header>
 
-            <Button
-              size={"default"}
-              className="hidden md:flex gap-2 text-white bg-[#0B63E5] px-6 py-[20px] md:justify-center md:items-center tracking-wider rounded-md hover:bg-[#0b62e5db]"
-            >
-              <LuLogIn className="font-bold " />
-              <Link to="/auth/login" className="">
-                Login
-              </Link>
-            </Button>
-
-            <div className="absolute top- right-8">
-              <Sheet>
-                <SheetTrigger onClick={handleSheetClose}>
-                  {" "}
-                  <span className=" -mr-2 md:hidden bg-[#0B63E5] inline-flex items-center justify-center p-2 rounded-md text-white hover:text-white hover:bg-[#0b62e5db] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
-                    <span className="sr-only">Open main menu</span>
-                    <svg
-                      className="block h-6 w-6"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M4 6h16M4 12h16M4 18h16"
-                      />
-                    </svg>
-                  </span>
-                </SheetTrigger>
-                <SheetContent>
-                  <SheetHeader>
-                    <SheetTitle className="flex items-center gap-4">
-                      <img
-                        className="h-10 w-10 flex-shrink-0 text-center "
-                        src={logo}
-                        alt="logo image"
-                        width={30}
-                        height={30}
-                      />
-                      <span className="text-2xl font-bold text-custom_secondary tracking-wide">
-                        JUTSA
-                      </span>
-                    </SheetTitle>
-                    <SheetDescription>
-                      <span className=" flex flex-col gap-1 justify-start text-left  mt-7">
-                        {menuItems.map((item) => {
-                          return (
-                            <React.Fragment key={item.path}>
-                              <Link
-                                to={item.path}
-                                className={` text-custom_secondary hover:text-custom_primary px-3 py-3 rounded-md text-sm font-medium`}
-                              >
-                                {item.label}
-                              </Link>
-                            </React.Fragment>
-                          );
-                        })}
-                        <Button variant={"default"} className="mt-5">
-                          Vote Now
-                        </Button>
-                      </span>
-                    </SheetDescription>
-                  </SheetHeader>
-                </SheetContent>
-              </Sheet>
-            </div>
-          </div>
+      <div className="relative isolate px-6 pt-14 lg:px-8">
+        <div
+          className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
+          aria-hidden="true"
+        >
+          <div
+            className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
+            style={{
+              clipPath:
+                "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
+            }}
+          />
         </div>
-      </nav>
+        <Hero />
+      </div>
     </div>
   );
-};
-
-export default Header;
+}
